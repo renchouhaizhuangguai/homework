@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>homework</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    const object={
+        id:1,
+        name:'test',
+        productSub:{
+            id:1,
+            name:'product'
+        },
+        updatedAt:'now'
+    };
+    const objectA={
+        name:'test',
+        productSub:{
+            name:'product',
+            id:1
+        },
+    };
+    const objectB={
+        name:'test',
+        productSub:{
+            name:'anotherProduct'
+        },
+    };
+    const arrObj={
+        id:1,
+        name:'test',
+        productSub:[{
+            id:1,
+            name:'product'
+        }],
+        updatedAt:'now'
+    };
+    const arrObjA={
+        name:'test',
+        productSub:[{
+            id:1,
+            name:'product'
+        }],
+    };
+    const arrObjB={
+        name:'test',
+        productSub:[{
+            name:'anotherProduct'
+        }],
+    };
+    const array=[{
+        id:1,
+        name:'test',
+        productSub:{
+            id:1,
+            name:'product'
+        },
+        updatedAt:'now'
+    }];
+    const arrayA=[{
+        name:'test',
+        productSub:{
+            name:'product',
+            id:1
+        },
+    }];
+    const arrayB=[{
+        name:'test',
+        productSub:{
+            name:'anotherProduct'
+        },
+    }];
+    compare=(obj1,obj2)=>{
+        let A = Object.keys(obj1),B=Object.keys(obj2),newsArr=[];
+        if(B.every((item)=>A.includes(item))) {
+            B.forEach(view=>{
+                switch (Object.prototype.toString.call(obj2[view])) {
+                    case '[object Object]':
+                        Object.keys(obj2[view]).forEach(item=>{
+                            newsArr.push(obj2[view][item]===obj1[view][item]?'true':'false');
+                        });
+                        break;
+                    case '[object Array]':
+                        Object.keys(obj2[view][0]).forEach(item=>{
+                            newsArr.push(obj2[view][0][item]===obj1[view][0][item]?'true':'false');
+                        });
+                        break;
+                    default:
+                        newsArr.push(obj1[view]===obj2[view]?'true':'false');
+                }
+            });
+        } else {
+            newsArr.push('false');
+            console.log('原始对象中没有目标对象的键名')
+        }
+        return !(newsArr.some(view=>view==='false'))
+    };
+
+
+    console.log(compare(object,objectA));
+    console.log(compare(object,objectB));
+    console.log(compare(arrObj,arrObjA));
+    console.log(compare(arrObj,arrObjB));
+    console.log(compare(array[0],arrayA[0]));
+    console.log(compare(array[0],arrayB[0]));
+
+
+</script>
